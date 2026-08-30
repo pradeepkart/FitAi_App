@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@SuppressWarnings("null")
 public class FitnessController {
   private final CurrentUserService current;
   private final WeightRecordRepository weights;

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@SuppressWarnings("null")
 public class AuthController {
   private final UserRepository repo;
   private final PasswordEncoder encoder;

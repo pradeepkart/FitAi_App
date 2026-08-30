@@ -3,6 +3,7 @@ package com.fitness.tracker.security;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +21,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   }
 
   protected void doFilterInternal(
-      HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+      @NonNull HttpServletRequest req,
+      @NonNull HttpServletResponse res,
+      @NonNull FilterChain chain)
       throws ServletException, IOException {
     String h = req.getHeader("Authorization");
     if (h != null && h.startsWith("Bearer ")) {
