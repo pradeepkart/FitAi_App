@@ -3,11 +3,17 @@ package com.fitness.tracker.exception;
 import java.time.Instant;
 import java.util.*;
 import org.springframework.http.*;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
+  @ExceptionHandler(AuthenticationException.class)
+  ResponseEntity<?> authentication(AuthenticationException e) {
+    return body(401, "Unauthorized", "Invalid email or password");
+  }
+
   @ExceptionHandler(NotFoundException.class)
   ResponseEntity<?> notFound(NotFoundException e) {
     return body(404, "Not Found", e.getMessage());
