@@ -1,1 +1,1 @@
-export {ProgressBar as default} from './UI';
+export { ProgressBar as default } from "./UI";

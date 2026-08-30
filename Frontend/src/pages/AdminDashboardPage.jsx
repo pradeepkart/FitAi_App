@@ -1,1 +1,1 @@
-export {AdminDashboardPage as default} from './OtherPages';
+export { AdminDashboardPage as default } from "./OtherPages";

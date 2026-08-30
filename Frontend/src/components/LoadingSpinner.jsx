@@ -1,1 +1,1 @@
-export {LoadingSpinner as default} from './UI';
+export { LoadingSpinner as default } from "./UI";

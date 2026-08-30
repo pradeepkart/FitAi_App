@@ -51,15 +51,15 @@ Frontend: `VITE_API_BASE_URL` (include `/api`). Never commit actual credentials.
 
 ## API overview
 
-| Area | Endpoints |
-|---|---|
-| Auth | `POST /api/auth/register`, `POST /api/auth/login` |
-| Profile | `GET, PUT /api/user/profile` |
-| Workouts | `GET, POST /api/workouts`; `GET, PUT, DELETE /api/workouts/{id}` |
-| Exercises | `GET /api/exercises[/{id}]`; ADMIN `POST, PUT, DELETE` |
-| Weight/water/calories/goals | `GET, POST /api/{resource}`; `PUT, DELETE /api/{resource}/{id}` |
-| Fitness/AI | `GET /api/fitness/bmi`, `POST /api/ai/recommendation` |
-| Admin | `GET /api/admin/stats`, `GET /api/admin/users[/{id}]`, `DELETE /api/admin/users/{id}` |
+| Area                        | Endpoints                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------- |
+| Auth                        | `POST /api/auth/register`, `POST /api/auth/login`                                     |
+| Profile                     | `GET, PUT /api/user/profile`                                                          |
+| Workouts                    | `GET, POST /api/workouts`; `GET, PUT, DELETE /api/workouts/{id}`                      |
+| Exercises                   | `GET /api/exercises[/{id}]`; ADMIN `POST, PUT, DELETE`                                |
+| Weight/water/calories/goals | `GET, POST /api/{resource}`; `PUT, DELETE /api/{resource}/{id}`                       |
+| Fitness/AI                  | `GET /api/fitness/bmi`, `POST /api/ai/recommendation`                                 |
+| Admin                       | `GET /api/admin/stats`, `GET /api/admin/users[/{id}]`, `DELETE /api/admin/users/{id}` |
 
 Registration and login return `{ token, user }`. The client stores these locally and its Axios interceptor sends `Authorization: Bearer <token>`. Spring's JWT filter validates the signature/expiration, loads the role, and creates the security context. A `401` clears the client session.
 

@@ -1,1 +1,1 @@
-export {ExercisePage as default} from './OtherPages';
+export { ExercisePage as default } from "./OtherPages";

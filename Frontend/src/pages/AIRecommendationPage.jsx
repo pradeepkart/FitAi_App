@@ -1,1 +1,1 @@
-export {AIRecommendationPage as default} from './OtherPages';
+export { AIRecommendationPage as default } from "./OtherPages";

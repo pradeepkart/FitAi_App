@@ -1,1 +1,1 @@
-export {default} from './TrackerPage';
+export { default } from "./TrackerPage";

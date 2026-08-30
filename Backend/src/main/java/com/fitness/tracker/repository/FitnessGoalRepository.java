@@ -1,1 +1,11 @@
-package com.fitness.tracker.repository; import com.fitness.tracker.entity.FitnessGoal; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface FitnessGoalRepository extends JpaRepository<FitnessGoal,Long>{List<FitnessGoal> findByUserIdOrderByStartDateDesc(Long id); Optional<FitnessGoal> findByIdAndUserId(Long id,Long userId);}
+package com.fitness.tracker.repository;
+
+import com.fitness.tracker.entity.FitnessGoal;
+import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FitnessGoalRepository extends JpaRepository<FitnessGoal, Long> {
+  List<FitnessGoal> findByUserIdOrderByStartDateDesc(Long id);
+
+  Optional<FitnessGoal> findByIdAndUserId(Long id, Long userId);
+}

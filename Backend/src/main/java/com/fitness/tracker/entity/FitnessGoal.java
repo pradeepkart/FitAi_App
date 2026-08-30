@@ -1,1 +1,26 @@
-package com.fitness.tracker.entity; import jakarta.persistence.*; import java.time.LocalDate; @Entity @Table(name="fitness_goals") public class FitnessGoal {@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id; @ManyToOne(fetch=FetchType.LAZY,optional=false) public User user; @Enumerated(EnumType.STRING) public Enums.GoalType goalType; public Double targetValue; public Double currentValue; public LocalDate startDate; public LocalDate targetDate; @Enumerated(EnumType.STRING) public Enums.GoalStatus status=Enums.GoalStatus.ACTIVE;}
+package com.fitness.tracker.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "fitness_goals")
+public class FitnessGoal {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long id;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  public User user;
+
+  @Enumerated(EnumType.STRING)
+  public Enums.GoalType goalType;
+
+  public Double targetValue;
+  public Double currentValue;
+  public LocalDate startDate;
+  public LocalDate targetDate;
+
+  @Enumerated(EnumType.STRING)
+  public Enums.GoalStatus status = Enums.GoalStatus.ACTIVE;
+}

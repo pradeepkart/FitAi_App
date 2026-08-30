@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "6.1.1",
+    "prettier": "^3.9.6",
+    "sql-formatter": "^15.8.2",
     "vite": "8.2.2"
   }
 }

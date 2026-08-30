@@ -1,1 +1,18 @@
-package com.fitness.tracker.entity; import jakarta.persistence.*; import java.time.LocalDate; @Entity @Table(name="weight_records") public class WeightRecord {@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id; @ManyToOne(fetch=FetchType.LAZY,optional=false) public User user; public Double weight; public LocalDate recordedDate;}
+package com.fitness.tracker.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "weight_records")
+public class WeightRecord {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long id;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  public User user;
+
+  public Double weight;
+  public LocalDate recordedDate;
+}

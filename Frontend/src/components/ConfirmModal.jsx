@@ -1,1 +1,21 @@
-export default function ConfirmModal({open,message='Are you sure?',onConfirm,onCancel}){if(!open)return null;return <div className="modal"><div className="card"><p>{message}</p><div className="row"><button onClick={onConfirm}>Confirm</button><button className="danger" onClick={onCancel}>Cancel</button></div></div></div>}
+export default function ConfirmModal({
+  open,
+  message = "Are you sure?",
+  onConfirm,
+  onCancel,
+}) {
+  if (!open) return null;
+  return (
+    <div className="modal">
+      <div className="card">
+        <p>{message}</p>
+        <div className="row">
+          <button onClick={onConfirm}>Confirm</button>
+          <button className="danger" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
