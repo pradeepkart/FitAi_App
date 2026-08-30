@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin")
+@SuppressWarnings("null")
 public class AdminController {
   private final UserRepository users;
   private final WorkoutRepository workouts;

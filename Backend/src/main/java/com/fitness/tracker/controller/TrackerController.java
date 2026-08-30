@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@SuppressWarnings("null")
 public class TrackerController {
   private final CurrentUserService current;
   private final WorkoutRepository workouts;

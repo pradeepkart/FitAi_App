@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/exercises")
+@SuppressWarnings("null")
 public class ExerciseController {
   private final ExerciseRepository repo;
 

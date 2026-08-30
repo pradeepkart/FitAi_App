@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
+@SuppressWarnings("null")
 public class UserController {
   private final CurrentUserService current;
   private final UserRepository repo;
