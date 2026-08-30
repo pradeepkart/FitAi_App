@@ -1,2 +1,28 @@
-<div id="root"></div>
-<script type="module" src="/src/main.jsx"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-based fitness tracking application" />
+    <title>FitAI</title>
+    <script>
+      // Some React DevTools releases inject a broken performance hook that
+      // throws while inspecting local Vite applications. Disable only that
+      // development hook before React DOM initializes; application behavior
+      // and production deployments are unaffected.
+      if (
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1"
+      ) {
+        const hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+        if (hook && typeof hook === "object") {
+          hook.isDisabled = true;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
