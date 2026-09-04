@@ -20,6 +20,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     users = u;
   }
 
+  @Override
   protected void doFilterInternal(
       @NonNull HttpServletRequest req,
       @NonNull HttpServletResponse res,
