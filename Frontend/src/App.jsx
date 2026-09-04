@@ -1,7 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
-import { LoginPage, RegisterPage } from "./pages/AuthPages";
+import {
+  ForgotPasswordPage,
+  LoginPage,
+  RegisterPage,
+  ResetPasswordPage,
+} from "./pages/AuthPages";
 import DashboardPage from "./pages/DashboardPage";
 import TrackerPage from "./pages/TrackerPage";
 import {
@@ -18,6 +23,8 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route
         element={
           <ProtectedRoute>

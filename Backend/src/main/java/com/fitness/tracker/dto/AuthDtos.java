@@ -17,6 +17,13 @@ public final class AuthDtos {
 
   public record LoginRequest(@Email @NotBlank String email, @NotBlank String password) {}
 
+  public record ForgotPasswordRequest(@Email @NotBlank String email) {}
+
+  public record ResetPasswordRequest(
+      @NotBlank String token, @Size(min = 8) String password) {}
+
+  public record MessageResponse(String message) {}
+
   public record UserResponse(
       Long id,
       String name,

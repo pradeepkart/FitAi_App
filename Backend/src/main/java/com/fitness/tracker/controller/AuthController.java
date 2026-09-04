@@ -4,6 +4,7 @@ import com.fitness.tracker.dto.AuthDtos.*;
 import com.fitness.tracker.entity.*;
 import com.fitness.tracker.repository.UserRepository;
 import com.fitness.tracker.security.JwtService;
+import com.fitness.tracker.service.PasswordResetService;
 import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -17,13 +18,19 @@ public class AuthController {
   private final PasswordEncoder encoder;
   private final AuthenticationManager auth;
   private final JwtService jwt;
+  private final PasswordResetService passwordReset;
 
   public AuthController(
-      UserRepository r, PasswordEncoder e, AuthenticationManager a, JwtService j) {
+      UserRepository r,
+      PasswordEncoder e,
+      AuthenticationManager a,
+      JwtService j,
+      PasswordResetService passwordReset) {
     repo = r;
     encoder = e;
     auth = a;
     jwt = j;
+    this.passwordReset = passwordReset;
   }
 
   @PostMapping("/register")
@@ -47,6 +54,18 @@ public class AuthController {
     auth.authenticate(
         new UsernamePasswordAuthenticationToken(q.email().toLowerCase(), q.password()));
     return response(repo.findByEmail(q.email().toLowerCase()).orElseThrow());
+  }
+
+  @PostMapping("/forgot-password")
+  MessageResponse forgotPassword(@Valid @RequestBody ForgotPasswordRequest q) {
+    passwordReset.sendResetLink(q.email());
+    return new MessageResponse("If that email is registered, a password reset link has been sent");
+  }
+
+  @PostMapping("/reset-password")
+  MessageResponse resetPassword(@Valid @RequestBody ResetPasswordRequest q) {
+    passwordReset.resetPassword(q.token(), q.password());
+    return new MessageResponse("Password updated successfully");
   }
 
   private AuthResponse response(User u) {

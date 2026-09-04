@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ErrorMessage } from "../components/UI";
+import api from "../services/api";
 function Auth({ registering = false }) {
   const auth = useAuth(),
     [error, setError] = useState(),
@@ -89,6 +90,11 @@ function Auth({ registering = false }) {
           </>
         )}
         <button>{registering ? "Start tracking" : "Sign in"}</button>
+        {!registering && (
+          <small>
+            <Link to="/forgot-password">Forgot password?</Link>
+          </small>
+        )}
         <small>
           {registering ? "Already a member?" : "New here?"}{" "}
           <Link to={registering ? "/login" : "/register"}>
@@ -101,3 +107,107 @@ function Auth({ registering = false }) {
 }
 export const LoginPage = () => <Auth />;
 export const RegisterPage = () => <Auth registering />;
+
+export function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState();
+  const [message, setMessage] = useState("");
+
+  const submit = async (event) => {
+    event.preventDefault();
+    setError(undefined);
+    setMessage("");
+    try {
+      const response = await api.post("/auth/forgot-password", { email });
+      setMessage(response.data.message);
+    } catch (requestError) {
+      setError(requestError);
+    }
+  };
+
+  return (
+    <div className="auth">
+      <form className="card form" onSubmit={submit}>
+        <h1>Forgot password</h1>
+        <p className="muted">
+          Enter your registered email to receive a reset link.
+        </p>
+        <ErrorMessage error={error} />
+        {message && <div className="success">{message}</div>}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          required
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <button>Send reset link</button>
+        <small>
+          <Link to="/login">Back to sign in</Link>
+        </small>
+      </form>
+    </div>
+  );
+}
+
+export function ResetPasswordPage() {
+  const [searchParams] = useSearchParams();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState();
+  const [message, setMessage] = useState("");
+
+  const submit = async (event) => {
+    event.preventDefault();
+    setError(undefined);
+    setMessage("");
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const response = await api.post("/auth/reset-password", {
+        token: searchParams.get("token") || "",
+        password,
+      });
+      setMessage(response.data.message);
+      setPassword("");
+      setConfirmPassword("");
+    } catch (requestError) {
+      setError(requestError);
+    }
+  };
+
+  return (
+    <div className="auth">
+      <form className="card form" onSubmit={submit}>
+        <h1>Choose a new password</h1>
+        <p className="muted">
+          Your password must contain at least 8 characters.
+        </p>
+        <ErrorMessage error={error} />
+        {message && <div className="success">{message}</div>}
+        <input
+          type="password"
+          placeholder="New password"
+          value={password}
+          minLength="8"
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Confirm new password"
+          value={confirmPassword}
+          minLength="8"
+          required
+          onChange={(event) => setConfirmPassword(event.target.value)}
+        />
+        <button>Update password</button>
+        <small>
+          <Link to="/login">Back to sign in</Link>
+        </small>
+      </form>
+    </div>
+  );
+}

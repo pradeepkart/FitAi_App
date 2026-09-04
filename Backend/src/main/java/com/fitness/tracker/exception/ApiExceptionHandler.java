@@ -24,6 +24,11 @@ public class ApiExceptionHandler {
     return body(400, "Bad Request", e.getMessage());
   }
 
+  @ExceptionHandler(IllegalStateException.class)
+  ResponseEntity<?> unavailable(IllegalStateException e) {
+    return body(503, "Service Unavailable", e.getMessage());
+  }
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
   ResponseEntity<?> validation(MethodArgumentNotValidException e) {
     String m =

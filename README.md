@@ -45,7 +45,7 @@ Open `http://localhost:5173`; the API runs at `http://localhost:8080/api`.
 
 ## Environment variables
 
-Backend: `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET`, `JWT_EXPIRATION` (default `86400000`), `FRONTEND_URL`, optional `AI_API_KEY`, `DDL_AUTO`, and Render-provided `PORT`.
+Backend: `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET`, `JWT_EXPIRATION` (default `86400000`), `FRONTEND_URL`, optional `AI_API_KEY`, `DDL_AUTO`, and Render-provided `PORT`. Password-reset email uses `MAIL_USERNAME` with a Gmail address and `MAIL_PASSWORD` with a Google App Password.
 
 Frontend: `VITE_API_BASE_URL` (include `/api`). Never commit actual credentials.
 
