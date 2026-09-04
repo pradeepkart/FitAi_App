@@ -44,16 +44,17 @@ public class JwtService {
   public String passwordResetEmail(String token, String currentPasswordHash) {
     var claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
     if (!"password-reset".equals(claims.get("purpose", String.class))
-        || !fingerprint(currentPasswordHash)
-            .equals(claims.get("passwordVersion", String.class))) {
-      throw new IllegalArgumentException("Password reset link is invalid or has already been used");
+        || !fingerprint(currentPasswordHash).equals(claims.get("passwordVersion", String.class))) {
+      throw new IllegalArgumentException(
+          "Password reset authorization is invalid or has already been used");
     }
     return claims.getSubject();
   }
 
   private String fingerprint(String value) {
     try {
-      byte[] digest = MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8));
+      byte[] digest =
+          MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8));
       return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
     } catch (Exception e) {
       throw new IllegalStateException("Unable to secure password reset token", e);

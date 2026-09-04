@@ -97,6 +97,15 @@ CREATE TABLE IF NOT EXISTS fitness_goals (
   CONSTRAINT fk_goals_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS password_reset_otps (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  otp_hash VARCHAR(255) NOT NULL,
+  expires_at TIMESTAMP(6) NOT NULL,
+  attempts INT NOT NULL DEFAULT 0,
+  UNIQUE KEY uk_password_reset_otps_email (email)
+) ENGINE = InnoDB;
+
 INSERT IGNORE INTO
   exercises (
     name,

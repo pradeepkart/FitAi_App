@@ -19,10 +19,14 @@ public final class AuthDtos {
 
   public record ForgotPasswordRequest(@Email @NotBlank String email) {}
 
-  public record ResetPasswordRequest(
-      @NotBlank String token, @Size(min = 8) String password) {}
+  public record VerifyOtpRequest(
+      @Email @NotBlank String email, @Pattern(regexp = "\\d{6}") String otp) {}
+
+  public record ResetPasswordRequest(@NotBlank String token, @Size(min = 8) String password) {}
 
   public record MessageResponse(String message) {}
+
+  public record OtpVerificationResponse(String message, String token) {}
 
   public record UserResponse(
       Long id,

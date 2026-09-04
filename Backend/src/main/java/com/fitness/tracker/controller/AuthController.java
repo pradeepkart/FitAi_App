@@ -58,8 +58,14 @@ public class AuthController {
 
   @PostMapping("/forgot-password")
   MessageResponse forgotPassword(@Valid @RequestBody ForgotPasswordRequest q) {
-    passwordReset.sendResetLink(q.email());
-    return new MessageResponse("If that email is registered, a password reset link has been sent");
+    passwordReset.sendOtp(q.email());
+    return new MessageResponse("If that email is registered, a verification code has been sent");
+  }
+
+  @PostMapping("/verify-reset-otp")
+  OtpVerificationResponse verifyResetOtp(@Valid @RequestBody VerifyOtpRequest q) {
+    String token = passwordReset.verifyOtp(q.email(), q.otp());
+    return new OtpVerificationResponse("Code verified", token);
   }
 
   @PostMapping("/reset-password")
